@@ -1,0 +1,21 @@
+cacheDir: ./_cache/
+template: ./template/CHANGELOG.tpl.md
+output:
+  dir: ./_output/changelog
+releases:
+- branch: release/3.4
+  repos:
+  - https://github.com/yunionio/notify-plugins
+  - https://github.com/yunionio/onecloud-service-operator
+  - https://github.com/yunionio/ocadm
+  - https://github.com/yunionio/onecloud
+  - https://github.com/yunionio/onecloud-operator
+  - https://github.com/yunionio/sdnagent
+- branch: release/3.3
+  repos:
+  - https://github.com/yunionio/notify-plugins
+  - https://github.com/yunionio/onecloud-service-operator
+  - https://github.com/yunionio/ocadm
+  - https://github.com/yunionio/onecloud
+  - https://github.com/yunionio/onecloud-operator
+  - https://github.com/yunionio/sdnagent

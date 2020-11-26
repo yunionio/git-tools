@@ -50,13 +50,15 @@ func generateHugoIndexMD(outDir string, data *types.ReleaseRenderData) error {
 
 	content := `---
 title: "%s"
-description: %s CHANGELOG 汇总，最近发布版本 %s - %s
+description: >
+  %s CHANGELOG 汇总，最近发布版本: %s , 时间: %s
 weight: -%d
 ---`
 
 	recentVersion := data.Versions[0]
 	recentTag := recentVersion.Repos[0]
 	tagName := recentTag.Tag.Name
+	// date := recentTag.Tag.Date.Format("2006-01-02 15:04:05")
 	date := recentTag.Tag.Date.Format("2006-01-02")
 	branch := data.Branch
 	content = fmt.Sprintf(content, branch, branch, tagName, date, data.Weight)

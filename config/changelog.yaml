@@ -1,5 +1,24 @@
 cacheDir: ./_cache/
 template: ./template/CHANGELOG.tpl.md
+options:
+  commit_group_by: Type
+  commit_group_sort_by: Title
+  commit_group_title_maps:
+    feat: Features
+    fix: Bug Fixes
+    perf: Performance Improvements
+    refactor: Code Refactoring
+  commit_sort_by: Scope
+  header_pattern: ^(\w*)(?:\(([\w\$\.,\/\-\*\s]*)\))?\:\s(.*)$
+  header_pattern_maps:
+  - Type
+  - Scope
+  - Subject
+  no_case_sensitive: false
+  no_merges: true
+  note_keywords:
+  - BREAKING CHANGE
+  use_sem_ver: true
 output:
   dir: ./_output/changelog
 releases:

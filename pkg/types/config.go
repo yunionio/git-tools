@@ -11,19 +11,46 @@ var (
 	ExampleGlocalChangeLogConfigv1 *GlobalChangeLogConfigV1 = &GlobalChangeLogConfigV1{
 		Template: "./template/CHANGELOG.tpl.md",
 		CacheDir: "./_cache/",
+		Output: &GlobalChangelogOutConfig{
+			Dir: "./_output/changelog",
+		},
+		Options: &ChangelogConfigOptions{
+			UseSemVer: true,
+			NoMerges:  true,
+			CommitGroupTitleMaps: map[string]string{
+				"feat":     "Features",
+				"fix":      "Bug Fixes",
+				"perf":     "Performance Improvements",
+				"refactor": "Code Refactoring",
+			},
+			HeaderPatternMaps: []string{"Type", "Scope", "Subject"},
+			HeaderPattern:     "^(\\w*)(?:\\(([\\w\\$\\.\\-\\*\\s]*)\\))?\\:\\s(.*)$",
+			CommitGroupBy:     "Type",
+			CommitGroupSortBy: "Title",
+			CommitSortBy:      "Scope",
+			NoteKeywords:      []string{"BREAKING CHANGE"},
+		},
 		Releases: []*ReleaseChangeLogConfigV1{
 			{
 				Branch: "release/3.4",
 				Repos: []string{
+					"https://github.com/yunionio/notify-plugins",
+					"https://github.com/yunionio/onecloud-service-operator",
+					"https://github.com/yunionio/ocadm",
 					"https://github.com/yunionio/onecloud",
 					"https://github.com/yunionio/onecloud-operator",
+					"https://github.com/yunionio/sdnagent",
 				},
 			},
 			{
 				Branch: "release/3.3",
 				Repos: []string{
+					"https://github.com/yunionio/notify-plugins",
+					"https://github.com/yunionio/onecloud-service-operator",
+					"https://github.com/yunionio/ocadm",
 					"https://github.com/yunionio/onecloud",
 					"https://github.com/yunionio/onecloud-operator",
+					"https://github.com/yunionio/sdnagent",
 				},
 			},
 		},

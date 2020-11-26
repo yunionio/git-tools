@@ -24,7 +24,7 @@ var (
 				"refactor": "Code Refactoring",
 			},
 			HeaderPatternMaps: []string{"Type", "Scope", "Subject"},
-			HeaderPattern:     "^(\\w*)(?:\\(([\\w\\$\\.\\-\\*\\s]*)\\))?\\:\\s(.*)$",
+			HeaderPattern:     `^(\w*)(?:\(([\w\$\.,\/\-\*\s]*)\))?\:\s(.*)$`,
 			CommitGroupBy:     "Type",
 			CommitGroupSortBy: "Title",
 			CommitSortBy:      "Scope",

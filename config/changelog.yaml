@@ -1,24 +1,23 @@
 cacheDir: ./_cache/
-template: ./template/CHANGELOG.tpl.md
 options:
-  commit_group_by: Type
-  commit_group_sort_by: Title
-  commit_group_title_maps:
+  commitGroupBy: Type
+  commitGroupSortBy: Title
+  commitGroupTitleMaps:
     feat: Features
     fix: Bug Fixes
     perf: Performance Improvements
     refactor: Code Refactoring
-  commit_sort_by: Scope
-  header_pattern: ^(\w*)(?:\(([\w\$\.,\/\-\*\s]*)\))?\:\s(.*)$
-  header_pattern_maps:
+  commitSortBy: Scope
+  headerPattern: ^(\w*)(?:\(([\w\$\.,\/\-\*\s]*)\))?\:\s(.*)$
+  headerPatternMaps:
   - Type
   - Scope
   - Subject
-  no_case_sensitive: false
-  no_merges: true
-  note_keywords:
+  noCaseSensitive: false
+  noMerges: true
+  noteKeywords:
   - BREAKING CHANGE
-  use_sem_ver: true
+  useSemVer: true
 output:
   dir: ./_output/changelog
 releases:
@@ -38,3 +37,4 @@ releases:
   - https://github.com/yunionio/onecloud
   - https://github.com/yunionio/onecloud-operator
   - https://github.com/yunionio/sdnagent
+template: ./template/CHANGELOG.tpl.md

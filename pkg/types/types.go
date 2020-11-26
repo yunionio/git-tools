@@ -68,30 +68,51 @@ type ChangelogConfig struct {
 }
 
 type ChangelogConfigInfo struct {
-	Title         string // Title of CHANGELOG
-	RepositoryURL string // URL of git repository
+	// Title of CHANGELOG
+	Title string `json:"title"`
+	// URL of git repository
+	RepositoryURL string `json:"repositoryURL"`
 }
 
 type ChangelogConfigOptions struct {
-	NextTag              string              // Treat unreleased commits as specified tags (EXPERIMENTAL)
-	UseSemVer            bool                // Use semantic versioning sort tag
-	TagFilterPattern     string              // Filter tag by regexp
-	NoCaseSensitive      bool                // Filter commits in a case insensitive way
-	CommitFilters        map[string][]string // Filter by using `Commit` properties and values. Filtering is not done by specifying an empty value
-	CommitSortBy         string              // Property name to use for sorting `Commit` (e.g. `Scope`)
-	CommitGroupBy        string              // Property name of `Commit` to be grouped into `CommitGroup` (e.g. `Type`)
-	CommitGroupSortBy    string              // Property name to use for sorting `CommitGroup` (e.g. `Title`)
-	CommitGroupTitleMaps map[string]string   // Map for `CommitGroup` title conversion
-	HeaderPattern        string              // A regular expression to use for parsing the commit header
-	HeaderPatternMaps    []string            // A rule for mapping the result of `HeaderPattern` to the property of `Commit`
-	IssuePrefix          []string            // Prefix used for issues (e.g. `#`, `gh-`)
-	RefActions           []string            // Word list of `Ref.Action`
-	NoMerges             bool                // Fetch logs no merges
-	MergePattern         string              // A regular expression to use for parsing the merge commit
-	MergePatternMaps     []string            // Similar to `HeaderPatternMaps`
-	RevertPattern        string              // A regular expression to use for parsing the revert commit
-	RevertPatternMaps    []string            // Similar to `HeaderPatternMaps`
-	NoteKeywords         []string            // Keyword list to find `Note`. A semicolon is a separator, like `<keyword>:` (e.g. `BREAKING CHANGE`)
+	// Treat unreleased commits as specified tags (EXPERIMENTAL)
+	NextTag string `json:"nextTag"`
+	// Use semantic versioning sort tag
+	UseSemVer bool `json:"useSemVer"`
+	// Filter tag by regexp
+	TagFilterPattern string `json:"tagFilterPattern"`
+	// Filter commits in a case insensitive way
+	NoCaseSensitive bool `json:"noCaseSensitive"`
+	// Filter by using `Commit` properties and values. Filtering is not done by specifying an empty value
+	CommitFilters map[string][]string `json:"commitFilters"`
+	// Property name to use for sorting `Commit` (e.g. `Scope`)
+	CommitSortBy string `json:"commitSortBy"`
+	// Property name of `Commit` to be grouped into `CommitGroup` (e.g. `Type`)
+	CommitGroupBy string `json:"commitGroupBy"`
+	// Property name to use for sorting `CommitGroup` (e.g. `Title`)
+	CommitGroupSortBy string `json:"commitGroupSortBy"`
+	// Map for `CommitGroup` title conversion
+	CommitGroupTitleMaps map[string]string `json:"commitGroupTitleMaps"`
+	// A regular expression to use for parsing the commit header
+	HeaderPattern string `json:"headerPattern"`
+	// A rule for mapping the result of `HeaderPattern` to the property of `Commit`
+	HeaderPatternMaps []string `json:"headerPatternMaps"`
+	// Prefix used for issues (e.g. `#`, `gh-`)
+	IssuePrefix []string `json:"issuePrefix"`
+	// Word list of `Ref.Action`
+	RefActions []string `json:"refActions"`
+	// Fetch logs no merges
+	NoMerges bool `json:"noMerges"`
+	// A regular expression to use for parsing the merge commit
+	MergePattern string `json:"mergePattern"`
+	// Similar to `HeaderPatternMaps`
+	MergePatternMaps []string `json:"mergePatternMaps"`
+	// A regular expression to use for parsing the revert commit
+	RevertPattern string `json:"revertPattern"`
+	// Similar to `HeaderPatternMaps`
+	RevertPatternMaps []string `json:"revertPatternMaps"`
+	// Keyword list to find `Note`. A semicolon is a separator, like `<keyword>:` (e.g. `BREAKING CHANGE`)
+	NoteKeywords []string `json:"noteKeywords"`
 }
 
 type GlobalChangelogOutConfig struct {

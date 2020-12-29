@@ -27,7 +27,10 @@ cmd/%: prepare_dir
 
 clean:
 	@rm -rf $(BIN_DIR)
-	@rm -rf $(OUTPUT_DIR)/changelog/release-*
+	# @rm -rf $(OUTPUT_DIR)/changelog/release-*
+
+gen:
+	./_output/bin/changelog-gen run -c ./config/changelog.yaml
 
 %:
 	@:

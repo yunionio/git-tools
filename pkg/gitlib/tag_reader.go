@@ -86,11 +86,13 @@ func (r *tagReader) ReadAll() ([]*types.Tag, error) {
 		}
 
 		var ver *semver.Version
+		semverReg := regexp.MustCompile(`^v[\d]+\.[\d]+\.[\d]+$`)
 		if r.useSemVer {
 			vName := strings.TrimPrefix(name, "v")
 			verObj, err := semver.Make(vName)
-			if err != nil {
-				log.Warningf("tag name %s is not semver, skip it", name)
+			if err != nil || !semverReg.MatchString(name) {
+				log.Warningf("tag %s is not semver, skip it", name)
+				continue
 			}
 			ver = &verObj
 		}

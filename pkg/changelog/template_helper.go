@@ -164,7 +164,7 @@ func NewReleaseRenderData(rls *types.ReleaseChangeLogResult) (*types.ReleaseRend
 			if !ok {
 				tagWeight, err := GetSemverStrWeight(tagVerStr)
 				if err != nil {
-					return nil, errors.Wrapf(err, "GetSemverStrWeight %q", tagVerStr)
+					return nil, errors.Wrapf(err, "GetSemverStrWeight %q, repo %q", tagVerStr, repo.Repo.Name)
 				}
 				versionMap[tagVerStr] = &types.GlobalVersionRenderData{
 					TagName: tagVerStr,

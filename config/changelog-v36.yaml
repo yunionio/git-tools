@@ -1,0 +1,49 @@
+cacheDir: ./_cache/
+options:
+  commitGroupBy: Type
+  commitGroupSortBy: Title
+  commitGroupTitleMaps:
+    feat: Features
+    fix: Bug Fixes
+    perf: Performance Improvements
+    refactor: Code Refactoring
+  commitSortBy: Scope
+  headerPattern: ^(\w*)(?:\(([\w\$\.,\/\-\*\s]*)\))?\:\s(.*)$
+  headerPatternMaps:
+  - Type
+  - Scope
+  - Subject
+  noCaseSensitive: false
+  noMerges: true
+  noteKeywords:
+  - BREAKING CHANGE
+  useSemVer: true
+output:
+  dir: ./_output/changelog
+releases:
+- branch: release/3.6
+  repos:
+  - https://github.com/yunionio/notify-plugins
+  - https://github.com/yunionio/cloudpods-service-operator
+  - https://github.com/yunionio/ocadm
+  - https://github.com/yunionio/cloudpods
+  - https://github.com/yunionio/cloudpods-operator
+  - https://github.com/yunionio/sdnagent
+  - https://github.com/yunionio/kubecomps
+- branch: release/3.4
+  repos:
+  - https://github.com/yunionio/notify-plugins
+  - https://github.com/yunionio/cloudpods-service-operator
+  - https://github.com/yunionio/ocadm
+  - https://github.com/yunionio/cloudpods
+  - https://github.com/yunionio/cloudpods-operator
+  - https://github.com/yunionio/sdnagent
+- branch: release/3.3
+  repos:
+  - https://github.com/yunionio/notify-plugins
+  - https://github.com/yunionio/cloudpods-service-operator
+  - https://github.com/yunionio/ocadm
+  - https://github.com/yunionio/cloudpods
+  - https://github.com/yunionio/cloudpods-operator
+  - https://github.com/yunionio/sdnagent
+template: ./template/CHANGELOG.tpl.md

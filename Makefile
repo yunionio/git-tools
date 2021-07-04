@@ -32,6 +32,9 @@ clean:
 gen:
 	./_output/bin/changelog-gen run -c ./config/changelog.yaml
 
+gen-v36:
+	./_output/bin/changelog-gen run -c ./config/changelog-v36.yaml
+
 %:
 	@:
 

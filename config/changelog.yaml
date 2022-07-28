@@ -21,6 +21,16 @@ options:
 output:
   dir: ./_output/changelog
 releases:
+- branch: release/3.9
+  repos:
+  - https://github.com/yunionio/notify-plugins
+  - https://github.com/yunionio/cloudpods-service-operator
+  - https://github.com/yunionio/ocadm
+  - https://github.com/yunionio/cloudpods
+  - https://github.com/yunionio/cloudpods-operator
+  - https://github.com/yunionio/sdnagent
+  - https://github.com/yunionio/kubecomps
+  - https://github.com/yunionio/dashboard
 - branch: release/3.8
   repos:
   - https://github.com/yunionio/notify-plugins

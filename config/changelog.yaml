@@ -31,6 +31,7 @@ releases:
   - https://github.com/yunionio/sdnagent
   - https://github.com/yunionio/kubecomps
   - https://github.com/yunionio/dashboard
+  - https://github.com/yunionio/ocboot
 - branch: release/3.8
   repos:
   - https://github.com/yunionio/notify-plugins

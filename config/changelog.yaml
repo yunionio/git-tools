@@ -31,6 +31,7 @@ releases:
   - https://github.com/yunionio/kubecomps
   - https://github.com/yunionio/dashboard
   - https://github.com/yunionio/ocboot
+  - https://github.com/yunionio/cloudmux
 - branch: release/3.9
   repos:
   - https://github.com/yunionio/notify-plugins

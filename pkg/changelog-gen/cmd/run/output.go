@@ -11,6 +11,8 @@ import (
 
 	"yunion.io/x/pkg/errors"
 
+	"io/fs"
+
 	"github.com/yunionio/git-tools/pkg/changelog"
 	"github.com/yunionio/git-tools/pkg/types"
 	"github.com/yunionio/git-tools/pkg/utils"
@@ -32,14 +34,48 @@ func handleReleaseOutput(data *types.ReleaseRenderData, templateFile string, con
 		return err
 	}
 
-	if err := generateHugoIndexMD(outDir, data); err != nil {
-		return errors.Wrap(err, "generate hugo _index.md")
+	if err := generateDocusaurusIndxMD(outDir, data); err != nil {
+		return errors.Wrap(err, "generate docusaurus index.mdx")
 	}
 
+	// if err := generateHugoIndexMD(outDir, data); err != nil {
+	// 	return errors.Wrap(err, "generate hugo _index.md")
+	// }
+
 	for _, version := range data.Versions {
-		if err := handleVersion(version, templateFile, outDir); err != nil {
+		if err := handleVersion(version, templateFile, outDir, true); err != nil {
 			return errors.Wrapf(err, "handle version %q", version.TagName)
 		}
+	}
+
+	return nil
+}
+
+func generateDocusaurusIndxMD(outDir string, data *types.ReleaseRenderData) error {
+	fileName := path.Join(outDir, "index.mdx")
+
+	content := `---
+sidebar_position: -%d
+---
+
+# %s
+
+%s CHANGELOG 汇总，最近发布版本: %s , 时间: %s
+	
+import IndexDocCardList from '@site/src/components/IndexDocCardList';
+
+<IndexDocCardList />`
+
+	recentVersion := data.Versions[0]
+	recentTag := recentVersion.Repos[0]
+	tagName := recentTag.Tag.Name
+	// date := recentTag.Tag.Date.Format("2006-01-02 15:04:05")
+	date := recentTag.Tag.Date.Format("2006-01-02")
+	branch := data.Branch
+	content = fmt.Sprintf(content, data.Weight, branch, branch, tagName, date)
+
+	if err := ioutil.WriteFile(fileName, []byte(content), 0644); err != nil {
+		return errors.Wrapf(err, "write file %q", fileName)
 	}
 
 	return nil
@@ -70,7 +106,7 @@ weight: -%d
 	return nil
 }
 
-func handleVersion(version *types.GlobalVersionRenderData, templateFile string, outDir string) error {
+func handleVersion(version *types.GlobalVersionRenderData, templateFile string, outDir string, isForDocus bool) error {
 	if _, err := os.Stat(templateFile); err != nil {
 		return errors.Wrapf(err, "stat template file")
 	}
@@ -86,7 +122,33 @@ func handleVersion(version *types.GlobalVersionRenderData, templateFile string, 
 		return errors.Wrapf(err, "open or create file %q", outFile)
 	}
 
-	return t.Execute(outF, version)
+	if err := t.Execute(outF, version); err != nil {
+		return errors.Wrapf(err, "execute template with version: %#v", version)
+	}
+	if !isForDocus {
+		return nil
+	}
+	outF.Close()
+
+	// post process for docusaurus
+	content, err := ioutil.ReadFile(outFile)
+	if err != nil {
+		return errors.Wrapf(err, "read file %s for docusaurus", outFile)
+	}
+	newContent := string(content)
+	for k, v := range map[string]string{
+		`<`: `\<`,
+		`>`: `\>`,
+		`{`: `\{`,
+		`}`: `\}`,
+	} {
+		newContent = strings.ReplaceAll(newContent, k, v)
+	}
+	if err := os.WriteFile(outFile, []byte(newContent), fs.FileMode(0644)); err != nil {
+		return errors.Wrapf(err, "write back to %s for docusaurus", outFile)
+	}
+
+	return nil
 }
 
 /*func handleRepoVersion(data *types.RepoVersionRenderData, templateFile string, outDir string) error {

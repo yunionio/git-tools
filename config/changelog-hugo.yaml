@@ -88,4 +88,4 @@ releases:
   - https://github.com/yunionio/cloudpods
   - https://github.com/yunionio/cloudpods-operator
   - https://github.com/yunionio/sdnagent
-template: ./template/CHANGELOG.docusaurus.tmp.mdx
+template: ./template/CHANGELOG.tpl.md

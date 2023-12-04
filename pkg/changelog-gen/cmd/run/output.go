@@ -29,6 +29,7 @@ func handleOutput(data *types.GlobalRenderData, templateFile string, config *typ
 
 func handleReleaseOutput(data *types.ReleaseRenderData, templateFile string, config *types.GlobalChangelogOutConfig) error {
 	dir := strings.Replace(data.Branch, "/", "-", -1)
+	dir = strings.ReplaceAll(dir, ".", "_")
 	outDir := path.Join(config.Dir, dir)
 	if err := utils.EnsureDir(outDir); err != nil {
 		return err

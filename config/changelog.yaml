@@ -21,6 +21,17 @@ options:
 output:
   dir: ./_output/changelog
 releases:
+- branch: release/3.11
+  repos:
+  - https://github.com/yunionio/cloudpods-service-operator
+  - https://github.com/yunionio/ocadm
+  - https://github.com/yunionio/cloudpods
+  - https://github.com/yunionio/cloudpods-operator
+  - https://github.com/yunionio/sdnagent
+  - https://github.com/yunionio/kubecomps
+  - https://github.com/yunionio/dashboard
+  - https://github.com/yunionio/ocboot
+  - https://github.com/yunionio/cloudmux
 - branch: release/3.10
   repos:
   - https://github.com/yunionio/cloudpods-service-operator

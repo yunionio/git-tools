@@ -15,7 +15,7 @@ sidebar_position: -{{.Weight}}
 
 仓库地址: {{ .Repo.URL }}
 
-{{ len .Commits }} commits to {{ tagNameRef .Repo.Name .Tag }} since this release.
+{{ len .Commits }} commits to {{ tagNameRef .Repo.Name .Repo.URL .Tag }} since this release.
 
 {{ range .CommitGroups -}}
 ### {{ .Title }} ({{len .Commits}})
@@ -33,8 +33,5 @@ sidebar_position: -{{.Weight}}
 {{ end -}}
 {{ end -}}
 
-{{ if .Tag.Previous -}}
-{{ tagRef .Tag .Repo.Name .Repo.URL }}
-{{ end -}}
 {{ end -}}
 {{ end -}}

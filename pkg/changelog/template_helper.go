@@ -19,12 +19,14 @@ var (
 )
 
 func init() {
-	tagNameRef := func(repoName string, tag *types.Tag) string {
+	tagNameRef := func(repoName string, repoURL string, tag *types.Tag) string {
 		ref := fmt.Sprintf("%s - %s", repoName, tag.Name)
+		cmpUrl := fmt.Sprintf("%s/tree/%s", repoURL, tag.Name)
 		if tag.Previous != nil {
 			ref = fmt.Sprintf("[%s]", ref)
+			cmpUrl = fmt.Sprintf("%s/compare/%s...%s", repoURL, tag.Previous.Name, tag.Name)
 		}
-		return ref
+		return fmt.Sprintf("%s(%s)", ref, cmpUrl)
 	}
 
 	TemplateFuncMap = template.FuncMap{
@@ -66,7 +68,7 @@ func init() {
 		"tagNameRef": tagNameRef,
 		// tagNameDate get the tag name with date
 		"tagNameDate": func(repoName string, tag *types.Tag) string {
-			tagName := tagNameRef(repoName, tag)
+			tagName := tagNameRef(repoName, "", tag)
 			dateStr := tag.Date.Format("2006-01-02")
 			tagName = fmt.Sprintf("%s - %s", tagName, dateStr)
 			return tagName
@@ -74,9 +76,9 @@ func init() {
 		// tagRef get the tag reference link url
 		"tagRef": func(tag *types.Tag, repoName string, repoURL string) string {
 			if tag.Previous == nil {
-				return fmt.Sprintf("[%s]: %s/tree/%s", tagNameRef(repoName, tag), repoURL, tag.Name)
+				return fmt.Sprintf("[%s]: %s/tree/%s", tagNameRef(repoName, repoURL, tag), repoURL, tag.Name)
 			}
-			return fmt.Sprintf("%s: %s/compare/%s...%s", tagNameRef(repoName, tag), repoURL, tag.Previous.Name, tag.Name)
+			return fmt.Sprintf("%s: %s/compare/%s...%s", tagNameRef(repoName, repoURL, tag), repoURL, tag.Previous.Name, tag.Name)
 		},
 		// commitSummary get the commit summary string
 		"commitSummary": templateCommitSummary,
